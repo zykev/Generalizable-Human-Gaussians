@@ -303,10 +303,10 @@ if __name__ == '__main__':
     cam_nums = 16
     scene_radius = 2.0
     res = (1024, 1024)
-    smplx_root = 'datasets/THuman/THuman2.0_smplx/'
-    thuman_root = 'datasets/THuman/THuman2.0_Release/'
-    source_root = 'datasets/THuman'
-    save_root = 'datasets/THuman/'
+    smplx_root = '.datasets/thuman/smplx/'
+    thuman_root = '.datasets/thuman/scan/'
+    source_root = '.datasets/thuman'
+    save_root = '.datasets/thuman'
     if not os.path.exists(save_root):
         os.makedirs(save_root)
     renderer = StaticRenderer()
