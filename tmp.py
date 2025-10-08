@@ -49,10 +49,10 @@ model_forward_params = dict(betas=param['betas'],
                             return_verts=True)
 
 smpl_out = smpl_model(**model_forward_params)
-smpl_verts = ((smpl_out.vertices[0] * param['scale'])).detach()
+# smpl_verts = ((smpl_out.vertices[0] * param['scale'])).detach()
 # smpl_verts = ((smpl_out.vertices[0] * param['scale'] + param['transl'] * param['scale'])).detach()
 
-
+smpl_verts = smpl_out.vertices[0].detach()
 # %%
 def compute_projections(xyz, K, R, T):
     """

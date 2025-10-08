@@ -100,7 +100,13 @@ def render_data(renderer, smplx_path, data_path, data_id, save_path, cam_nums, r
     texture = cv2.imread(img_path)[:, :, ::-1]
     texture = np.ascontiguousarray(texture)
     texture = texture.swapaxes(0, 1)[:, ::-1, :]
-    obj = t3.readobj(obj_path, scale=1)
+
+    smpl_path = os.path.join(smplx_path, data_id, 'smplx_param.pkl')
+    with open(smpl_path, 'rb') as f:
+        smpl_para = pickle.load(f)
+    
+    scale = smpl_para['scale']
+    obj = t3.readobj(obj_path, scale=1/scale)
 
     # height normalization
 
@@ -128,10 +134,6 @@ def render_data(renderer, smplx_path, data_path, data_id, save_path, cam_nums, r
     degree_interval = 360 / cam_nums
 
     # thuman needs a normalization of orientation
-    smpl_path = os.path.join(smplx_path, data_id, 'smplx_param.pkl')
-    with open(smpl_path, 'rb') as f:
-        smpl_para = pickle.load(f)
-
     y_orient = smpl_para['global_orient'][0][1]
     angle_base = (y_orient * 180.0 / np.pi)
 
